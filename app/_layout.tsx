@@ -1,5 +1,18 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
+import './global.css';
 
-export default function RootLayout() {
-  return <Stack />;
+export default function Layout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    ></Stack>
+  );
 }
