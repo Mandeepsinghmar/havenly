@@ -12,9 +12,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import images from '@/constants/images';
 import icons from '@/constants/icons';
+import { login } from '@/auth/appwrite';
 
 const SignIn = () => {
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    login();
+  };
   return (
     <SafeAreaView className='h-full bg-white'>
       <ScrollView contentContainerClassName='h-full'>
