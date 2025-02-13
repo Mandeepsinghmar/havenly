@@ -26,8 +26,11 @@ const Profile = () => {
   }
 
   return (
-    <SafeAreaView className='h-full bg-white'>
-      <ScrollView contentContainerClassName='h-full px-5 pt-2'>
+    <SafeAreaView className=' bg-white h-full'>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName=' px-5 pt-2'
+      >
         <View className='flex flex-row justify-between'>
           <Text className='font-rubik-semibold text-lg text-black-300 '>
             Profile

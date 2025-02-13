@@ -5,7 +5,8 @@ import person from '@/assets/icons/person.png';
 import bell from '@/assets/icons/bell.png';
 import filter from '@/assets/icons/filter.png';
 import star from '@/assets/icons/star.png';
-import heart from '@/assets/icons/heart.png';
+import whiteHeart from '@/assets/icons/white-heart.png';
+import grayHeart from '@/assets/icons/gray-heart.png';
 import backArrow from '@/assets/icons/back-arrow.png';
 import calendar from '@/assets/icons/calendar.png';
 import info from '@/assets/icons/info.png';
@@ -40,7 +41,8 @@ export default {
   bell,
   filter,
   star,
-  heart,
+  whiteHeart,
+  grayHeart,
   backArrow,
   calendar,
   info,

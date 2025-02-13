@@ -1,6 +1,7 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import icons from '@/constants/icons';
+import { router } from 'expo-router';
 
 interface TopbarProps {
   avatar: string;
@@ -9,7 +10,10 @@ interface TopbarProps {
 const Topbar: React.FC<TopbarProps> = ({ avatar, name }) => {
   return (
     <View className='flex flex-row justify-between mb-4'>
-      <View className='flex flex-row gap-3'>
+      <TouchableOpacity
+        onPress={() => router.push('/profile')}
+        className='flex flex-row gap-3'
+      >
         <Image
           source={{
             uri: avatar,
@@ -23,7 +27,7 @@ const Topbar: React.FC<TopbarProps> = ({ avatar, name }) => {
           </Text>
           <Text className='font-rubik-medium text-base'>{name}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
       <View className='relative'>
         <Image source={icons.bell} className='w-6 h-6' resizeMode='contain' />
         <View className='rounded-full w-2 h-2 bg-primary-100 absolute top-0 right-1'></View>

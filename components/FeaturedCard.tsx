@@ -48,7 +48,7 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({
 
         {/* Bottom Right - Heart Icon */}
         <TouchableOpacity className='absolute bottom-3 right-3'>
-          <Image source={icons.heart} className='w-6 h-6' />
+          <Image source={icons.whiteHeart} className='w-6 h-6' />
         </TouchableOpacity>
       </ImageBackground>
     </View>

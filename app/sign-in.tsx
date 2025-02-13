@@ -28,7 +28,7 @@ const SignIn = () => {
     }
   };
   if (shouldRedirect) {
-    return <Redirect href='/profile' />;
+    return <Redirect href='/' />;
   }
 
   return (
@@ -53,7 +53,7 @@ const SignIn = () => {
         </View>
         <TouchableOpacity
           onPress={handleLogin}
-          className=' mt-4 mx-8 bg-white shadow-md shadow-zinc-300 py-4 rounded-full '
+          className=' mt-4 mx-8 bg-white shadow-md shadow-zinc-200 py-4 rounded-full '
         >
           <View className='flex flex-row items-center justify-center gap-3 '>
             <Image
