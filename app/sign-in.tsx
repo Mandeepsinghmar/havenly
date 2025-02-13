@@ -6,18 +6,31 @@ import {
   Button,
   TouchableHighlight,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import images from '@/constants/images';
 import icons from '@/constants/icons';
 import { login } from '@/auth/appwrite';
+import { Redirect } from 'expo-router';
 
 const SignIn = () => {
-  const handleLogin = () => {
-    login();
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  const handleLogin = async () => {
+    const loginCompleted = await login();
+    if (loginCompleted) {
+      setShouldRedirect(true);
+    } else {
+      Alert.alert('Error', 'Failed to login');
+    }
   };
+  if (shouldRedirect) {
+    return <Redirect href='/profile' />;
+  }
+
   return (
     <SafeAreaView className='h-full bg-white'>
       <ScrollView contentContainerClassName='h-full'>

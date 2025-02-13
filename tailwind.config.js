@@ -28,7 +28,7 @@ module.exports = {
         accent: {
           100: 'FBFBFD',
         },
-        danger: 'F75555',
+        danger: '#F75555',
       },
     },
   },

@@ -21,7 +21,7 @@ console.log('Appwrite Endpoint:', config.endpoint);
 
 export async function login() {
   try {
-    const redirectUrl = Linking.createURL('/'); // Ensure deep linking is correctly set up
+    const redirectUrl = Linking.createURL(''); // Ensure deep linking is correctly set up
 
     const response = await account.createOAuth2Token(
       OAuthProvider.Google,
@@ -38,17 +38,41 @@ export async function login() {
     console.log('Browser Result:', browserResult);
 
     if (browserResult.type !== 'success')
-      throw new Error('User cancelled or login failed.');
+      throw new Error('redirect error User cancelled or login failed.');
 
     const url = new URL(browserResult.url);
-    const secret = url.searchParams.get('secret');
-    const userId = url.searchParams.get('userId');
+    const secret = url.searchParams.get('secret')?.toString();
+    const userId = url.searchParams.get('userId')?.toString();
     if (!userId || !secret) throw new Error('User cancelled or login failed.');
-    const session = account.createSession(userId, secret);
+    const session = await account.createSession(userId, secret);
     if (!session) throw new Error('failed to create a session.');
     return true;
   } catch (e) {
     console.error('Login Error:', e);
+    return null;
+  }
+}
+
+export async function logout() {
+  try {
+    await account.deleteSession('current');
+    console.log('logout successful');
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+export async function getUserInfo() {
+  try {
+    const response = await account.get();
+    if (response.$id) {
+      const userAvatar = avatar.getInitials(response.name);
+      return { ...response, avatar: userAvatar.toString() };
+    }
+  } catch (e) {
+    console.log(e);
     return null;
   }
 }
