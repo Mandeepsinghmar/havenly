@@ -17,7 +17,6 @@ client
 
 export const avatar = new Avatars(client);
 export const account = new Account(client);
-console.log('Appwrite Endpoint:', config.endpoint);
 
 export async function login() {
   try {
@@ -27,7 +26,6 @@ export async function login() {
       OAuthProvider.Google,
       redirectUrl
     );
-    console.log('OAuth Response:', response, redirectUrl);
 
     if (!response) throw new Error('OAuth URL missing.');
 
@@ -35,7 +33,6 @@ export async function login() {
       response.toString(),
       redirectUrl
     );
-    console.log('Browser Result:', browserResult);
 
     if (browserResult.type !== 'success')
       throw new Error('redirect error User cancelled or login failed.');
@@ -56,7 +53,6 @@ export async function login() {
 export async function logout() {
   try {
     await account.deleteSession('current');
-    console.log('logout successful');
     return true;
   } catch (e) {
     console.log(e);

@@ -1,9 +1,12 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import icons from '@/constants/icons';
 import { getUserInfo, logout } from '@/auth/appwrite';
 import { Redirect } from 'expo-router';
+
+import { settings } from '@/constants/data';
+import icons from '@/constants/icons';
+import SettingCard from '@/components/settingCard';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -24,23 +27,43 @@ const Profile = () => {
 
   return (
     <SafeAreaView className='h-full bg-white'>
-      <ScrollView contentContainerClassName='h-full px-10 pt-2'>
+      <ScrollView contentContainerClassName='h-full px-5 pt-2'>
         <View className='flex flex-row justify-between'>
           <Text className='font-rubik-semibold text-lg text-black-300 '>
             Profile
           </Text>
-          <Image source={icons.bell} className='w-6 h-6' resizeMode='contain' />
+          <View className='relative'>
+            <Image
+              source={icons.bell}
+              className='w-6 h-6'
+              resizeMode='contain'
+            />
+            <View className='rounded-full w-2 h-2 bg-primary-100 absolute top-0 right-1'></View>
+          </View>
         </View>
 
         <View className='flex justify-center items-center gap-4'>
-          <Image
-            source={{
-              uri: user?.avatar,
-            }}
-            className='w-36 h-36 rounded-full '
-            resizeMode='contain'
-          />
+          <View className='relative'>
+            <Image
+              source={{
+                uri: user?.avatar,
+              }}
+              className='w-36 h-36 rounded-full '
+              resizeMode='contain'
+            />
+            <Image
+              source={icons.edit}
+              className='w-6 h-6 absolute bottom-1 right-3'
+              resizeMode='contain'
+            />
+          </View>
+
           <Text className='font-rubik-semibold text-2xl'>{user?.name}</Text>
+        </View>
+        <View className='flex gap-6 mt-12'>
+          {settings.map((setting, i) => (
+            <SettingCard key={i} title={setting.title} icon={setting.icon} />
+          ))}
         </View>
 
         <TouchableOpacity
@@ -51,10 +74,19 @@ const Profile = () => {
               return <Redirect href='/sign-in' />;
             }
           }}
+          className='mt-6 '
         >
-          <Text className='font-rubik-semibold text-2xl text-danger text-right mt-10'>
-            Logout
-          </Text>
+          <View className='flex flex-row items-center gap-2'>
+            <Image
+              source={icons.logout}
+              className='w-7 h-7'
+              resizeMode='contain'
+            />
+
+            <Text className='font-rubik-medium text-lg text-danger '>
+              Logout
+            </Text>
+          </View>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
