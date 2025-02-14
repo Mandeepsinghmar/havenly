@@ -32,9 +32,15 @@ import swim from '@/assets/icons/swim.png';
 import wifi from '@/assets/icons/wifi.png';
 import location from '@/assets/icons/location.png';
 import edit from '@/assets/icons/edit.png';
+import activeSearch from '@/assets/icons/active-search.png';
+import activeProfile from '@/assets/icons/active-profile.png';
+import activeHome from '@/assets/icons/active-home.png';
 
 export default {
   google,
+  activeProfile,
+  activeSearch,
+  activeHome,
   home,
   search,
   person,

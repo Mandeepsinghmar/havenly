@@ -23,7 +23,11 @@ const TabsLayout = () => {
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} title={'Home'} icon={icons.home} />
+            <TabIcon
+              focused={focused}
+              title={'Home'}
+              icon={focused ? icons.activeHome : icons.home}
+            />
           ),
         }}
       />
@@ -33,7 +37,11 @@ const TabsLayout = () => {
           title: 'Explore',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} title={'Explore'} icon={icons.search} />
+            <TabIcon
+              focused={focused}
+              title={'Explore'}
+              icon={focused ? icons.activeSearch : icons.search}
+            />
           ),
         }}
       />
@@ -43,7 +51,11 @@ const TabsLayout = () => {
           title: 'Profile',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} title={'Profile'} icon={icons.person} />
+            <TabIcon
+              focused={focused}
+              title={'Profile'}
+              icon={focused ? icons.activeProfile : icons.person}
+            />
           ),
         }}
       />

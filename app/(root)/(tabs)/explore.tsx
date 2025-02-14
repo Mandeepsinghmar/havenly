@@ -22,6 +22,8 @@ const Explore = () => {
         data={cards}
         contentContainerClassName='px-5 gap-6 pb-28'
         showsVerticalScrollIndicator={false}
+        refreshing={false}
+        onRefresh={() => {}}
         renderItem={({ item }) => (
           <Card
             key={item.id}

@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import icons from '@/constants/icons';
+import { router } from 'expo-router';
 
 type FeaturedCardProps = {
   title: string;
@@ -15,6 +16,7 @@ type FeaturedCardProps = {
   rating: number;
   image: any; // Adjust if using a specific image type like `ImageSourcePropType`
   category: string;
+  id: number;
 };
 
 const FeaturedCard: React.FC<FeaturedCardProps> = ({
@@ -24,9 +26,10 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({
   price,
   rating,
   category,
+  id,
 }) => {
   return (
-    <View>
+    <TouchableOpacity onPress={() => router.push(`/property/:${id}`)}>
       <ImageBackground
         source={image}
         className='w-[250px] h-[340px] rounded-2xl overflow-hidden relative mt-6'
@@ -51,7 +54,7 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({
           <Image source={icons.whiteHeart} className='w-6 h-6' />
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 

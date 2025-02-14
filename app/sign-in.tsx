@@ -3,8 +3,6 @@ import {
   Text,
   Image,
   ScrollView,
-  Button,
-  TouchableHighlight,
   TouchableOpacity,
   Alert,
 } from 'react-native';
@@ -14,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
 import { login } from '@/auth/appwrite';
-import { Redirect } from 'expo-router';
+import { router } from 'expo-router';
 
 const SignIn = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -28,7 +26,7 @@ const SignIn = () => {
     }
   };
   if (shouldRedirect) {
-    return <Redirect href='/' />;
+    router.push('/');
   }
 
   return (

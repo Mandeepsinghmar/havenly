@@ -1,15 +1,13 @@
 import {
   View,
   Text,
-  Image,
   ScrollView,
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
-  TextInput,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'expo-router';
+import { router } from 'expo-router';
 import SearchBar from '@/components/SearchBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getUserInfo } from '@/auth/appwrite';
@@ -18,7 +16,6 @@ import FeaturedCard from '@/components/FeaturedCard';
 import { cards, categories, featuredCards } from '@/constants/data';
 import Categories from '@/components/Categories';
 import Card from '@/components/Card';
-import icons from '@/constants/icons';
 
 const Index = () => {
   const [user, setUser] = useState({});
@@ -26,13 +23,13 @@ const Index = () => {
   useEffect(() => {
     const userInfo = async () => {
       const result = await getUserInfo();
-      console.log(result);
       setUser(result);
     };
     userInfo();
   }, []);
+
   if (!user) {
-    return <Redirect href='/sign-in' />;
+    router.push('/sign-in');
   }
   return (
     <SafeAreaView className=' h-full bg-white '>
@@ -81,7 +78,7 @@ const Index = () => {
                 <Text className='text-xl font-rubik-bold text-black-300'>
                   Featured
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/explore')}>
                   <Text className='text-base font-rubik-bold text-primary-100'>
                     See all
                   </Text>
@@ -99,7 +96,7 @@ const Index = () => {
                   data={featuredCards}
                   renderItem={({ item }) => (
                     <FeaturedCard
-                      // id={item.id}
+                      id={item.id}
                       title={item.title}
                       image={item.image}
                       price={item.price}
@@ -136,7 +133,7 @@ const Index = () => {
                 <Text className='text-xl font-rubik-bold text-black-300'>
                   Our Recommendation
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/explore')}>
                   <Text className='text-base font-rubik-bold text-primary-100'>
                     See all
                   </Text>
