@@ -17,8 +17,6 @@ type CardProps = {
   image: any; // Adjust if using a specific image type like `ImageSourcePropType`
   category: string;
   id: number;
-  width?: string;
-  height?: string;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -29,8 +27,6 @@ const Card: React.FC<CardProps> = ({
   rating,
   category,
   id,
-  width,
-  height,
 }) => {
   return (
     <TouchableOpacity className='flex flex-col items-center gap-4 '>
@@ -38,9 +34,7 @@ const Card: React.FC<CardProps> = ({
         <Link href={`property/:${id}`}>
           <ImageBackground
             source={image}
-            className={`rounded-lg overflow-hidden ${
-              width ? `${width}` : 'w-[300px]'
-            } ${height ? `${height}` : 'h-[340px]'}`}
+            className={'rounded-lg overflow-hidden w-[150px] h-[180px]'}
           >
             <View className='absolute top-3 right-3 bg-white px-2 py-1 rounded-full flex-row items-center'>
               <Image source={icons.star} className='w-4 h-4 mr-1' />

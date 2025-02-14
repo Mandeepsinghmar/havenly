@@ -24,6 +24,7 @@ const Explore = () => {
         showsVerticalScrollIndicator={false}
         refreshing={false}
         onRefresh={() => {}}
+        numColumns={2}
         renderItem={({ item }) => (
           <Card
             key={item.id}
@@ -41,7 +42,7 @@ const Explore = () => {
             <View className='flex flex-row justify-between items-center mb-4'>
               <TouchableOpacity
                 onPress={() => router.push('/')}
-                className='rounded-full bg-primary-300 p-2'
+                className='rounded-full bg-primary-300 p-3'
               >
                 <Image
                   source={icons.backArrow}

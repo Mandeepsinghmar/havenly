@@ -48,8 +48,6 @@ const Index = () => {
             rating={item.rating}
             location={item.location}
             id={item.id}
-            width='w-[150px]'
-            height='h-[180px]'
           />
         )}
         // keyExtractor={(item) => item.id}
