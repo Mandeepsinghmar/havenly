@@ -78,6 +78,9 @@ const Explore = () => {
                 />
               ))}
             </ScrollView>
+            <Text className='text-black-300 font-rubik-semibold text-xl mt-8'>
+              Found 4 results
+            </Text>
           </View>
         }
       />
