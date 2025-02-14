@@ -6,6 +6,7 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'expo-router';
@@ -17,6 +18,7 @@ import FeaturedCard from '@/components/FeaturedCard';
 import { cards, categories, featuredCards } from '@/constants/data';
 import Categories from '@/components/Categories';
 import Card from '@/components/Card';
+import icons from '@/constants/icons';
 
 const Index = () => {
   const [user, setUser] = useState({});
@@ -49,6 +51,8 @@ const Index = () => {
             rating={item.rating}
             location={item.location}
             id={item.id}
+            width='w-[150px]'
+            height='h-[180px]'
           />
         )}
         // keyExtractor={(item) => item.id}
@@ -67,7 +71,7 @@ const Index = () => {
           )
         }
         ListHeaderComponent={() => (
-          <View className='px-5'>
+          <View className='px-5 mt-4'>
             <Topbar avatar={user?.avatar} name={user?.name} />
 
             <SearchBar />

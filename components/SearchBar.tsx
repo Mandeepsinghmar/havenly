@@ -5,18 +5,12 @@ import icons from '@/constants/icons';
 
 const SearchBar = () => {
   return (
-    <View className=' relative  bg-accent-100 border  h-[52px] mt-4 border-gray-100 px-4 py-3 rounded-lg'>
-      <View className='flex-row items-center gap-3'>
-        <Image source={icons.search} className='w-5 h-5' />
-        <TextInput
-          placeholder='Search something'
-          className='py-2 text-gray-700 w-full pr-16 overflow-scroll'
-          placeholderTextColor='#888'
-        />
+    <View className='flex-row items-center bg-accent-100 border  h-[52px] mt-4 border-gray-100 rounded-lg px-4 py-2'>
+      <View className='flex-row items-center flex-1'>
+        <Image source={icons.search} className='w-5 h-5 mr-2' />
+        <TextInput className='flex-1 h-10' placeholder='Search something' />
       </View>
-      <TouchableOpacity className='absolute right-3 top-4'>
-        <Image source={icons.filter} className='w-5 h-5' />
-      </TouchableOpacity>
+      <Image source={icons.filter} className='w-5 h-5 ml-2' />
     </View>
   );
 };

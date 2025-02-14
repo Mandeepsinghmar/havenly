@@ -1,10 +1,19 @@
-import { View, Text, FlatList, Image } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { cards } from '@/constants/data';
+import { cards, categories } from '@/constants/data';
 import SearchBar from '@/components/SearchBar';
 import icons from '@/constants/icons';
 import Card from '@/components/Card';
+import { router } from 'expo-router';
+import Categories from '@/components/Categories';
 
 const Explore = () => {
   return (
@@ -26,14 +35,20 @@ const Explore = () => {
           />
         )}
         ListHeaderComponent={
-          <View>
-            <View className='flex flex-row justify-between mb-4'>
-              <Image
-                source={icons.backArrow}
-                className='w-6 h-6'
-                resizeMode='contain'
-              />
-              <Text className='text-black-300 font-rubik-bold text-base'>
+          <View className='mt-4'>
+            <View className='flex flex-row justify-between items-center mb-4'>
+              <TouchableOpacity
+                onPress={() => router.push('/')}
+                className='rounded-full bg-primary-300 p-2'
+              >
+                <Image
+                  source={icons.backArrow}
+                  className='w-6 h-6'
+                  resizeMode='contain'
+                />
+              </TouchableOpacity>
+
+              <Text className='text-black-300 font-rubik-medium text-base'>
                 Search for Your Ideal Home
               </Text>
               <View className='relative'>
@@ -46,6 +61,20 @@ const Explore = () => {
               </View>
             </View>
             <SearchBar />
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerClassName='mt-6 gap-4'
+            >
+              {categories.map((data, i) => (
+                <Categories
+                  key={i}
+                  name={data.category}
+                  isActive={false}
+                  onPress={() => {}}
+                />
+              ))}
+            </ScrollView>
           </View>
         }
       />
