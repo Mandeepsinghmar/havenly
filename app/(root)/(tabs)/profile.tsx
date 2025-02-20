@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getUserInfo, logout } from '@/auth/appwrite';
+import { getUserInfo, logout } from '@/lib/appwrite';
 import { Redirect } from 'expo-router';
 
 import { settings } from '@/constants/data';

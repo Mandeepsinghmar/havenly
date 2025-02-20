@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import SearchBar from '@/components/SearchBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getUserInfo } from '@/auth/appwrite';
+import { getUserInfo } from '@/lib/appwrite';
 import Topbar from '@/components/Topbar';
 import FeaturedCard from '@/components/FeaturedCard';
 import { cards, categories, featuredCards } from '@/constants/data';

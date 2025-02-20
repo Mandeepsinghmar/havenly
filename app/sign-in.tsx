@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import images from '@/constants/images';
 import icons from '@/constants/icons';
-import { login } from '@/auth/appwrite';
+import { login } from '@/lib/appwrite';
 import { router } from 'expo-router';
 
 const SignIn = () => {
