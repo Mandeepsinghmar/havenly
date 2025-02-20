@@ -62,13 +62,19 @@ export async function logout() {
 
 export async function getUserInfo() {
   try {
-    const response = await account.get();
-    if (response.$id) {
-      const userAvatar = avatar.getInitials(response.name);
-      return { ...response, avatar: userAvatar.toString() };
+    const result = await account.get();
+    if (result.$id) {
+      const userAvatar = avatar.getInitials(result.name);
+
+      return {
+        ...result,
+        avatar: userAvatar.toString(),
+      };
     }
-  } catch (e) {
-    console.log(e);
+
+    return null;
+  } catch (error) {
+    console.log(error);
     return null;
   }
 }

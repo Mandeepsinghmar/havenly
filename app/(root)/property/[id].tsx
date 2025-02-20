@@ -218,9 +218,7 @@ const Property = () => {
           <LocationCard />
           <ReviewCard />
         </SafeAreaView>
-        <View className='absolute bottom-0'>
-          <Pricing />
-        </View>
+        <Pricing />
       </ScrollView>
     </View>
   );

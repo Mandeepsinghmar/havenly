@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getUserInfo, logout } from '@/lib/appwrite';
@@ -7,23 +14,20 @@ import { Redirect } from 'expo-router';
 import { settings } from '@/constants/data';
 import icons from '@/constants/icons';
 import SettingCard from '@/components/settingCard';
+import { useGlobalContext } from '@/lib/global-provider';
 
 const Profile = () => {
-  const [user, setUser] = useState({});
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const { user, refetch } = useGlobalContext();
 
-  useEffect(() => {
-    const userInfo = async () => {
-      const result = await getUserInfo();
-      console.log(result);
-      setUser(result);
-    };
-    userInfo();
-  }, []);
-
-  if (shouldRedirect) {
-    return <Redirect href='/sign-in' />;
-  }
+  const handleLogout = async () => {
+    const result = await logout();
+    if (result) {
+      Alert.alert('Success', 'Logged out successfully');
+      refetch();
+    } else {
+      Alert.alert('Error', 'Failed to logout');
+    }
+  };
 
   return (
     <SafeAreaView className=' bg-white h-full'>
@@ -69,16 +73,7 @@ const Profile = () => {
           ))}
         </View>
 
-        <TouchableOpacity
-          onPress={async () => {
-            const msg = await logout();
-            if (msg) {
-              setShouldRedirect(true);
-              return <Redirect href='/sign-in' />;
-            }
-          }}
-          className='mt-6 '
-        >
+        <TouchableOpacity onPress={handleLogout} className='mt-6 '>
           <View className='flex flex-row items-center gap-2'>
             <Image
               source={icons.logout}

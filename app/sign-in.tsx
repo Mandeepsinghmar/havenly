@@ -12,22 +12,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
 import { login } from '@/lib/appwrite';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
+import { useGlobalContext } from '@/lib/global-provider';
 
 const SignIn = () => {
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const { refetch, loading, isLogged } = useGlobalContext();
+
+  if (!loading && isLogged) return <Redirect href='/' />;
 
   const handleLogin = async () => {
-    const loginCompleted = await login();
-    if (loginCompleted) {
-      setShouldRedirect(true);
+    const result = await login();
+    if (result) {
+      refetch();
     } else {
       Alert.alert('Error', 'Failed to login');
     }
   };
-  if (shouldRedirect) {
-    router.push('/');
-  }
 
   return (
     <SafeAreaView className='h-full bg-white'>
