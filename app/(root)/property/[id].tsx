@@ -22,40 +22,22 @@ const { width } = Dimensions.get('window');
 
 const Property = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const flatListRef = useRef<FlatList>(null);
 
   function handleScroll(event: {
     nativeEvent: { contentOffset: { x: number } };
   }) {
     const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
-    console.log(event.nativeEvent.contentOffset.x, newIndex);
     setActiveIndex(newIndex);
   }
 
-  function scrollToIndex(index: number) {
-    if (flatListRef.current) {
-      flatListRef.current.scrollToIndex({
-        index,
-        animated: true,
-        viewPosition: 0.5, // Centers the item in the viewport
-      });
-    }
-  }
-
   return (
-    <View className='h-full bg-white relative '>
-      <StatusBar
-        translucent
-        backgroundColor='transparent'
-        barStyle='dark-content'
-      />
+    <View className=' bg-white '>
       <ScrollView
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
       >
         <View className='relative'>
           <FlatList
-            ref={flatListRef}
             data={gallery}
             horizontal
             pagingEnabled
@@ -97,10 +79,7 @@ const Property = () => {
             </TouchableOpacity>
 
             <View className=' flex-row items-center gap-4'>
-              <TouchableOpacity
-                // onPress={() => router.push('/')}
-                className='rounded-full bg-primary-300 p-3'
-              >
+              <TouchableOpacity className='rounded-full bg-primary-300 p-3'>
                 <Image
                   source={icons.whiteHeart}
                   className='w-6 h-6'
@@ -109,10 +88,7 @@ const Property = () => {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity
-                // onPress={() => router.push('/')}
-                className='rounded-full bg-primary-300 p-3'
-              >
+              <TouchableOpacity className='rounded-full bg-primary-300 p-3'>
                 <Image
                   source={icons.send}
                   className='w-6 h-6'
@@ -124,10 +100,7 @@ const Property = () => {
           </SafeAreaView>
           <View className='absolute bottom-4 left-1/2 -translate-x-1/2 flex-row gap-2'>
             {gallery.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => scrollToIndex(index)}
-              >
+              <TouchableOpacity key={index}>
                 <View
                   key={index}
                   className={`w-2 h-2 rounded-full ${
@@ -138,7 +111,7 @@ const Property = () => {
             ))}
           </View>
         </View>
-        <SafeAreaView className='px-4 mt-10 '>
+        <SafeAreaView className='px-4 -mt-10 '>
           {/* topbar  */}
           <View className='mb-8  w-full border-b pb-8 border-gray-100 '>
             <Text className='text-2xl mb-1 font-rubik-bold text-black-300'>
