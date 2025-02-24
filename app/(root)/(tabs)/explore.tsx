@@ -70,12 +70,7 @@ const Explore = () => {
               contentContainerClassName='mt-6 gap-4'
             >
               {categories.map((data, i) => (
-                <Categories
-                  key={i}
-                  name={data.category}
-                  isActive={false}
-                  onPress={() => {}}
-                />
+                <Categories key={i} name={data.category} isActive={false} />
               ))}
             </ScrollView>
             <Text className='text-black-300 font-rubik-semibold text-xl mt-8'>

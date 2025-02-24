@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import images from '@/constants/images';
@@ -16,14 +16,16 @@ import { Redirect, router } from 'expo-router';
 import { useGlobalContext } from '@/lib/global-provider';
 
 const SignIn = () => {
-  const { refetch, loading, isLogged } = useGlobalContext();
+  const { user, isLogged, fetchUser } = useGlobalContext();
 
-  if (!loading && isLogged) return <Redirect href='/' />;
+  useEffect(() => {
+    if (isLogged && user) return router.push('/');
+  }, [isLogged, user]);
 
   const handleLogin = async () => {
-    const result = await login();
-    if (result) {
-      refetch();
+    const loginCompleted = await login();
+    if (loginCompleted) {
+      fetchUser();
     } else {
       Alert.alert('Error', 'Failed to login');
     }

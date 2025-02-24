@@ -14,20 +14,21 @@ import { settings } from '@/constants/data';
 import icons from '@/constants/icons';
 import SettingCard from '@/components/settingCard';
 import { useGlobalContext } from '@/lib/global-provider';
+import { router } from 'expo-router';
 
 const Profile = () => {
-  const { user, refetch } = useGlobalContext();
+  const { user, setUser } = useGlobalContext();
 
   const handleLogout = async () => {
     const result = await logout();
     if (result) {
       Alert.alert('Success', 'Logged out successfully');
-      refetch();
+      setUser(null);
+      router.replace('/sign-in');
     } else {
       Alert.alert('Error', 'Failed to logout');
     }
   };
-
   return (
     <SafeAreaView className=' bg-white h-full'>
       <ScrollView

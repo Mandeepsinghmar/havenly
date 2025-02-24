@@ -1,9 +1,7 @@
 import React from 'react';
-
 import { Redirect, Slot } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { useGlobalContext } from '@/lib/global-provider';
 
 export default function AppLayout() {

@@ -30,12 +30,6 @@ const Index = () => {
     userInfo();
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/sign-in');
-    }
-  }, [user]);
-
   return (
     <SafeAreaView className=' h-full bg-white '>
       <FlatList
@@ -145,12 +139,7 @@ const Index = () => {
                 contentContainerClassName='mt-6 gap-4'
               >
                 {categories.map((data, i) => (
-                  <Categories
-                    key={i}
-                    name={data.category}
-                    isActive={false}
-                    onPress={() => {}}
-                  />
+                  <Categories key={i} name={data.category} isActive={false} />
                 ))}
               </ScrollView>
             </View>

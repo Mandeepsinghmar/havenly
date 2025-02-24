@@ -1,9 +1,9 @@
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-import './global.css';
 import { useEffect } from 'react';
 import GlobalProvider from '@/lib/global-provider';
 import React from 'react';
+import './global.css';
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -14,6 +14,10 @@ export default function RootLayout() {
     'Rubik-Medium': require('../assets/fonts/Rubik-Medium.ttf'),
     'Rubik-Regular': require('../assets/fonts/Rubik-Regular.ttf'),
   });
+
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync();
+  }, []);
 
   useEffect(() => {
     if (fontsLoaded) {

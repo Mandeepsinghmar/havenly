@@ -1,14 +1,18 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-
-import { getUserInfo } from './appwrite';
-import { useAppwrite } from './useAppwrite';
-import { Redirect } from 'expo-router';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
+import { getUserInfo, logout } from './appwrite';
 
 interface GlobalContextType {
   isLogged: boolean;
   user: User | null;
   loading: boolean;
-  refetch: () => void;
+  setUser: any;
+  fetchUser: () => void;
 }
 
 export interface User {
@@ -25,13 +29,23 @@ interface GlobalProviderProps {
 }
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
-  const {
-    data: user,
-    loading,
-    refetch,
-  } = useAppwrite({
-    fn: getUserInfo,
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const fetchedUser = await getUserInfo();
+      setUser(fetchedUser);
+    } catch (error) {
+      setUser(null);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const isLogged = !!user;
 
@@ -41,7 +55,8 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         isLogged,
         user,
         loading,
-        refetch,
+        setUser,
+        fetchUser,
       }}
     >
       {children}
