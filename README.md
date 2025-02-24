@@ -1,50 +1,77 @@
-# Welcome to your Expo app 👋
+# TikTok Clone
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A TikTok-like social media application built using Next.js, React, and Sanity as the backend.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Video uploading and sharing
+- User authentication (Google login)
+- Like and comment functionality
+- Copy video link to clipboard
+- Infinite scrolling with `nice-react-ticker`
+- State management using Zustand
 
+## Tech Stack
+
+- **Frontend:** Next.js, React, TailwindCSS
+- **Backend:** Sanity.io (headless CMS)
+- **Authentication:** Google OAuth
+- **State Management:** Zustand
+- **Utilities:** Axios, React Icons, React Hot Toast
+- **File Handling:** Multer
+
+## Installation
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (>=14)
+- npm or yarn
+
+### Steps
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/tiktok-clone.git
+   cd tiktok-clone
+   ```
+2. Install dependencies:
    ```bash
    npm install
+   # or
+   yarn install
    ```
-
-2. Start the app
-
+3. Run the development server:
    ```bash
-    npx expo start
+   npm run dev
+   # or
+   yarn dev
    ```
+4. Open `http://localhost:3000` in your browser.
 
-In the output, you'll find options to open the app in a
+## Scripts
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- `npm run dev` - Starts the development server
+- `npm run build` - Builds the application for production
+- `npm run start` - Runs the application in production mode
+- `npm run lint` - Runs ESLint checks
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Environment Variables
 
-## Get a fresh project
+Create a `.env.local` file and add the required environment variables:
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Contributing
 
-## Learn more
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-To learn more about developing your project with Expo, look at the following resources:
+## License
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
