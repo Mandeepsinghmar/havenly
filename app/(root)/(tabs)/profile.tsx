@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getUserInfo, logout } from '@/lib/appwrite';
-import { Redirect } from 'expo-router';
 
+import { logout } from '@/lib/appwrite';
 import { settings } from '@/constants/data';
 import icons from '@/constants/icons';
 import SettingCard from '@/components/settingCard';

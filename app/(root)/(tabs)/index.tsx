@@ -5,6 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router } from 'expo-router';
@@ -16,6 +17,7 @@ import FeaturedCard from '@/components/FeaturedCard';
 import { cards, categories, featuredCards } from '@/constants/data';
 import Categories from '@/components/Categories';
 import Card from '@/components/Card';
+import icons from '@/constants/icons';
 
 const Index = () => {
   const [user, setUser] = useState({});
