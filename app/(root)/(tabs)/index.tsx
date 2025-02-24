@@ -5,22 +5,22 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router } from 'expo-router';
-import SearchBar from '@/components/SearchBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import SearchBar from '@/components/SearchBar';
 import { getUserInfo } from '@/lib/appwrite';
 import Topbar from '@/components/Topbar';
 import FeaturedCard from '@/components/FeaturedCard';
 import { cards, categories, featuredCards } from '@/constants/data';
 import Categories from '@/components/Categories';
 import Card from '@/components/Card';
-import icons from '@/constants/icons';
+import { User } from '@/lib/global-provider';
 
 const Index = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const userInfo = async () => {
@@ -30,9 +30,12 @@ const Index = () => {
     userInfo();
   }, []);
 
-  if (!user) {
-    router.push('/sign-in');
-  }
+  useEffect(() => {
+    if (!user) {
+      router.push('/sign-in');
+    }
+  }, [user]);
+
   return (
     <SafeAreaView className=' h-full bg-white '>
       <FlatList
@@ -52,7 +55,7 @@ const Index = () => {
             id={item.id}
           />
         )}
-        // keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerClassName='pb-32 gap-4'
         columnWrapperClassName='flex gap-5 px-5'
         showsVerticalScrollIndicator={false}
@@ -103,8 +106,6 @@ const Index = () => {
                       category={item.category}
                       rating={item.rating}
                       location={item.location}
-                      // item={item}
-                      // onPress={() => handleCardPress(item.$id)}
                     />
                   )}
                   ListEmptyComponent={() =>
@@ -118,15 +119,13 @@ const Index = () => {
                       </View>
                     )
                   }
-                  // keyExtractor={(item) => item.$id}
+                  keyExtractor={(item) => item.id.toString()}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   contentContainerClassName='flex gap-5 mt-5'
                 />
               )}
             </View>
-
-            {/* <Button title="seed" onPress={seed} /> */}
 
             <View className='mt-5'>
               <View className='flex flex-row items-center justify-between'>

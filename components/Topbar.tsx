@@ -4,8 +4,8 @@ import icons from '@/constants/icons';
 import { router } from 'expo-router';
 
 interface TopbarProps {
-  avatar: string;
-  name: string;
+  avatar?: string;
+  name?: string;
 }
 const Topbar: React.FC<TopbarProps> = ({ avatar, name }) => {
   return (
