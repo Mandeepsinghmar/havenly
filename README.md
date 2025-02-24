@@ -1,24 +1,28 @@
-# TikTok Clone
+# Havenly Real Estate App
 
-A TikTok-like social media application built using Next.js, React, and Sanity as the backend.
+Havenly is a modern real estate application built using Expo and React Native, designed to help users browse and discover properties with ease.
 
 ## Features
 
-- Video uploading and sharing
-- User authentication (Google login)
-- Like and comment functionality
-- Copy video link to clipboard
-- Infinite scrolling with `nice-react-ticker`
-- State management using Zustand
+- Property listings with detailed information
+
+- Interactive UI with smooth navigation
+
+- Google authentication
+
+- Safe and responsive UI using `react-native-safe-area-context`
+
+- Gesture-based interactions with `react-native-gesture-handler`
 
 ## Tech Stack
 
-- **Frontend:** Next.js, React, TailwindCSS
-- **Backend:** Sanity.io (headless CMS)
-- **Authentication:** Google OAuth
-- **State Management:** Zustand
-- **Utilities:** Axios, React Icons, React Hot Toast
-- **File Handling:** Multer
+- **Framework:** Expo, React Native
+- **Navigation:** Expo Router, React Navigation
+- **UI Styling:** NativeWind
+- **Authentication:** Appwrite
+- **State Management:** React Native Appwrite
+
+
 
 ## Installation
 
@@ -27,44 +31,32 @@ A TikTok-like social media application built using Next.js, React, and Sanity as
 Ensure you have the following installed:
 
 - Node.js (>=14)
-- npm or yarn
+- Expo CLI
 
 ### Steps
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/tiktok-clone.git
-   cd tiktok-clone
+   git clone https://github.com/your-repo/havenly.git
+   cd havenly
    ```
 2. Install dependencies:
    ```bash
    npm install
-   # or
-   yarn install
    ```
-3. Run the development server:
+3. Start the Expo development server:
    ```bash
-   npm run dev
-   # or
-   yarn dev
+   npx expo start
    ```
-4. Open `http://localhost:3000` in your browser.
-
-## Scripts
-
-- `npm run dev` - Starts the development server
-- `npm run build` - Builds the application for production
-- `npm run start` - Runs the application in production mode
-- `npm run lint` - Runs ESLint checks
+4. Open the app using an emulator or the Expo Go app.
 
 ## Environment Variables
 
-Create a `.env.local` file and add the required environment variables:
+Create a `.env` file and add the required environment variables:
 
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+EXPO_PUBLIC_APPWRITE_PROJECT_ID = 
+EXPO_PUBLIC_APPWRITE_ENDPOINT =
 ```
 
 ## Contributing
