@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -21,22 +21,58 @@ import { User } from '@/lib/global-provider';
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Filter recommended cards based on search and category
+  const filteredCards = cards.filter((card) => {
+    const matchesSearch = searchQuery
+      ? card.title.toLowerCase().includes(searchQuery.toLowerCase())
+      : true;
+
+    const matchesCategory =
+      selectedCategory === 'All'
+        ? true
+        : card.category.toLowerCase() === selectedCategory.toLowerCase();
+
+    return matchesSearch && matchesCategory;
+  });
 
   useEffect(() => {
-    const userInfo = async () => {
+    const fetchUserInfo = async () => {
+      try {
+        const result = await getUserInfo();
+        setUser(result);
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
       const result = await getUserInfo();
       setUser(result);
-    };
-    userInfo();
+    } catch (error) {
+      console.error('Refresh failed:', error);
+    } finally {
+      setRefreshing(false);
+    }
   }, []);
 
   return (
-    <SafeAreaView className=' h-full bg-white '>
+    <SafeAreaView className='h-full bg-white'>
       <FlatList
-        data={cards}
+        data={filteredCards}
         numColumns={2}
-        refreshing={false}
-        onRefresh={() => {}}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
         renderItem={({ item }) => (
           <Card
             key={item.id}
@@ -54,12 +90,12 @@ const Index = () => {
         columnWrapperClassName='flex gap-5 px-5'
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          true ? (
+          isLoading ? (
             <ActivityIndicator size='large' className='text-primary-300 mt-5' />
           ) : (
-            <View>
+            <View className='flex items-center justify-center mt-10'>
               <Text className='text-center font-rubik-bold text-xl'>
-                No results
+                No results found
               </Text>
             </View>
           )
@@ -68,7 +104,11 @@ const Index = () => {
           <View className='px-5 mt-4'>
             <Topbar avatar={user?.avatar} name={user?.name} />
 
-            <SearchBar />
+            <SearchBar
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              placeholder='Search designs, styles, rooms...'
+            />
 
             <View className='my-5'>
               <View className='flex flex-row items-center justify-between'>
@@ -82,12 +122,11 @@ const Index = () => {
                 </TouchableOpacity>
               </View>
 
-              {false ? (
-                <ActivityIndicator size='large' className='text-primary-300' />
-              ) : cards.length === 0 ? (
-                <View>
-                  <Text>No results</Text>
-                </View>
+              {isLoading ? (
+                <ActivityIndicator
+                  size='large'
+                  className='text-primary-300 mt-5'
+                />
               ) : (
                 <FlatList
                   data={featuredCards}
@@ -102,17 +141,13 @@ const Index = () => {
                       location={item.location}
                     />
                   )}
-                  ListEmptyComponent={() =>
-                    false ? (
-                      <ActivityIndicator size='large' />
-                    ) : (
-                      <View className='w-full flex my-5 items-center'>
-                        <Text className=' font-rubik-bold text-xl'>
-                          No results
-                        </Text>
-                      </View>
-                    )
-                  }
+                  ListEmptyComponent={() => (
+                    <View className='w-full flex my-5 items-center'>
+                      <Text className='font-rubik-bold text-xl'>
+                        No featured items
+                      </Text>
+                    </View>
+                  )}
                   keyExtractor={(item) => item.id.toString()}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -139,7 +174,12 @@ const Index = () => {
                 contentContainerClassName='mt-6 gap-4'
               >
                 {categories.map((data, i) => (
-                  <Categories key={i} name={data.category} isActive={false} />
+                  <Categories
+                    key={i}
+                    name={data.category}
+                    isActive={selectedCategory === data.category}
+                    onPress={() => setSelectedCategory(data.category)}
+                  />
                 ))}
               </ScrollView>
             </View>
